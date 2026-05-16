@@ -55,8 +55,11 @@ function SettingsTab.Init(Page, Library, Watermark, KeybindList, Detach)
         Mode = "Toggle",
         Default = Enum.KeyCode.Z,
         Flag = "MenuKeybind",
-        Callback = function(Value)
-            Library.MenuKeybind = "Enum.KeyCode." .. tostring(Value.Key)
+        Callback = function()
+            local flag = Library.Flags["MenuKeybind"]
+            if flag and flag.Key then
+                Library.MenuKeybind = "Enum.KeyCode." .. tostring(flag.Key)
+            end
         end
     })
 

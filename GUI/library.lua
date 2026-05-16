@@ -2381,12 +2381,9 @@ local Library do
             end
 
             Window.IsOpen = Bool
+            Debounce = true
 
-            Debounce = true 
-
-            if Bool then 
-                pcall(function() Items["MainFrame"].Instance.Visible = true end)
-            end
+            pcall(function() Items["MainFrame"].Instance.Visible = Bool end)
 
             local Descendants = Items["MainFrame"].Instance:GetDescendants()
             TableInsert(Descendants, Items["MainFrame"].Instance)
@@ -2410,7 +2407,6 @@ local Library do
 
             if not NewTween then
                 Debounce = false
-                pcall(function() Items["MainFrame"].Instance.Visible = Bool end)
                 return
             end
 

@@ -61,15 +61,16 @@ task.spawn(function()
             Settings = Window:AddTab("Settings"),
         }
 
+        SaveManager:SetLibrary(Library)
+        ThemeManager:SetLibrary(Library)
+        SaveManager:SetFolder("tuffhiverd")
+        ThemeManager:SetFolder("tuffhiverd")
+
         CombatTab.Init(Tabs.Combat)
         VisualsTab.Init(Tabs.Visuals)
         MiscTab.Init(Tabs.Misc)
         SettingsTab.Init(Tabs.Settings, Library, SaveManager, ThemeManager)
 
-        SaveManager:SetLibrary(Library)
-        ThemeManager:SetLibrary(Library)
-        SaveManager:SetFolder("tuffhiverd")
-        ThemeManager:SetFolder("tuffhiverd")
         SaveManager:LoadAutoloadConfig()
     end
 

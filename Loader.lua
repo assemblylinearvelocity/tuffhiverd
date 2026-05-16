@@ -42,6 +42,9 @@ task.spawn(function()
     local VisualsTab  = loadModule("Menu/VisualsTab.lua")
     if not VisualsTab  then return warn("Failed to load VisualsTab") end
 
+    local ESP         = loadModule("Game/Visuals/ESP.lua")
+    if not ESP         then return warn("Failed to load ESP") end
+
     local MiscTab     = loadModule("Menu/MiscTab.lua")
     if not MiscTab     then return warn("Failed to load MiscTab") end
 
@@ -74,7 +77,7 @@ task.spawn(function()
         SaveManager:SetIgnoreIndexes({ "MenuKeybind" })
 
         CombatTab.Init(Tabs.Combat)
-        VisualsTab.Init(Tabs.Visuals)
+        VisualsTab.Init(Tabs.Visuals, ESP)
         MiscTab.Init(Tabs.Misc)
         SettingsTab.Init(Tabs.Settings, Library, SaveManager, ThemeManager)
 
@@ -85,6 +88,7 @@ task.spawn(function()
     end
 
     function tuffhiverd.detach()
+        pcall(function() ESP:Unload() end)
         if Library then
             Library:Unload()
         end

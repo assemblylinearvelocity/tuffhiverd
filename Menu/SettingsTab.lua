@@ -23,6 +23,7 @@ function SettingsTab.Init(Tab, Library, SaveManager, ThemeManager)
         end
     })
 
+    ThemeManager:SetLibrary(Library)
     ThemeManager:ApplyToTab(Tab)
     SaveManager:BuildConfigSection(Tab)
 end

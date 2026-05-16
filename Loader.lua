@@ -19,9 +19,11 @@ local function loadModule(path)
 end
 
 if shared.tuffhiverd then
-    if shared.tuffhiverd.detach then
-        shared.tuffhiverd.detach()
-    end
+    pcall(function()
+        if shared.tuffhiverd.detach then
+            shared.tuffhiverd.detach()
+        end
+    end)
 end
 
 task.spawn(function()

@@ -2,7 +2,7 @@ local GITHUB_BASE = "https://raw.githubusercontent.com/assemblylinearvelocity/tu
 
 local function loadModule(path)
     local success, result = pcall(function()
-        return game:HttpGet(GITHUB_BASE .. path)
+        return game:HttpGet(GITHUB_BASE .. path .. "?v=" .. os.time())
     end)
     if not success then
         warn("[tuffhiverd] Failed to fetch:", path, "|", result)

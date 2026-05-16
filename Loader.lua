@@ -45,13 +45,19 @@ task.spawn(function()
             Size = UDim2.new(0, 550, 0, 400)
         })
 
+        local Watermark = Library:Watermark("tuffhiverd")
+        Watermark:SetVisibility(true)
+
+        local KeybindList = Library:KeybindList()
+        KeybindList:SetVisibility(false)
+
         local CombatPage  = Window:Page({ Name = "Combat",  Columns = 2 })
         local VisualsPage = Window:Page({ Name = "Visuals", Columns = 2 })
         local MiscPage    = Window:Page({ Name = "Misc",    Columns = 2 })
 
         CombatTab.Init(CombatPage)
         VisualsTab.Init(VisualsPage)
-        MiscTab.Init(MiscPage, Library)
+        MiscTab.Init(MiscPage, Library, Watermark, KeybindList, tuffhiverd.detach)
     end
 
     function tuffhiverd.detach()

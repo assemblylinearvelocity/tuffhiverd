@@ -1,23 +1,16 @@
 local ESP = {}
 
-local Players    = game:GetService("Players")
-local RunService = game:GetService("RunService")
+local Players     = game:GetService("Players")
+local RunService  = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
-local EspRenderer = nil
-local Renderers   = {}
-local Connection  = nil
+local PlayerRenderer = nil
+local MobRenderer    = nil
+local Renderers      = {}
+local Connection     = nil
 
 local function isPlayer(model)
     return Players:GetPlayerFromCharacter(model) ~= nil
-end
-
-local function getLabel(model)
-    local player = Players:GetPlayerFromCharacter(model)
-    if player then
-        return player.DisplayName .. " (@" .. player.Name .. ")"
-    end
-    return model.Name
 end
 
 local function removeRenderer(model)
@@ -42,18 +35,26 @@ local function update()
         if not model:IsA("Model") then continue end
         if model == LocalPlayer.Character then continue end
 
-        local isPlr   = isPlayer(model)
+        local isPlr      = isPlayer(model)
         local shouldShow = (isPlr and playerESP) or (not isPlr and mobESP)
 
         if shouldShow then
             current[model] = true
+
             if not Renderers[model] then
-                Renderers[model] = EspRenderer.new(model.Name)
+                if isPlr then
+                    local player = Players:GetPlayerFromCharacter(model)
+                    Renderers[model] = PlayerRenderer.new(player)
+                else
+                    Renderers[model] = MobRenderer.new(model)
+                end
             end
+
             local color = isPlr
                 and (Options.PlayerESPColor and Options.PlayerESPColor.Value or Color3.fromRGB(255, 255, 255))
                 or  (Options.MobESPColor    and Options.MobESPColor.Value    or Color3.fromRGB(255, 100, 100))
-            Renderers[model]:Update(model, true, showHealth, showName, color, getLabel(model))
+
+            Renderers[model]:Update(model, true, showHealth, showName, color)
         else
             if Renderers[model] then
                 Renderers[model]:HideBox()
@@ -68,8 +69,9 @@ local function update()
     end
 end
 
-function ESP:Init(renderer)
-    EspRenderer = renderer
+function ESP:Init(playerRenderer, mobRenderer)
+    PlayerRenderer = playerRenderer
+    MobRenderer    = mobRenderer
 end
 
 function ESP:Start()

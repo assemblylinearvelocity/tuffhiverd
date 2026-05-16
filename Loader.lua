@@ -54,6 +54,9 @@ task.spawn(function()
     local MiscTab     = loadModule("Menu/MiscTab.lua")
     if not MiscTab     then return warn("Failed to load MiscTab") end
 
+    local Misc        = loadModule("Game/Misc/Misc.lua")
+    if not Misc        then return warn("Failed to load Misc") end
+
     local SettingsTab = loadModule("Menu/SettingsTab.lua")
     if not SettingsTab then return warn("Failed to load SettingsTab") end
 
@@ -86,7 +89,8 @@ task.spawn(function()
         CombatTab.Init(Tabs.Combat)
         VisualsTab.Init(Tabs.Visuals, ESP)
         MiscTab.Init(Tabs.Misc)
-        SettingsTab.Init(Tabs.Settings, Library, SaveManager, ThemeManager, ESP)
+        Misc:Init()
+        SettingsTab.Init(Tabs.Settings, Library, SaveManager, ThemeManager, ESP, Misc)
 
         Library:SetWatermarkVisibility(true)
         Library:SetWatermark("tuffhiverd")
@@ -96,6 +100,7 @@ task.spawn(function()
 
     function tuffhiverd.detach()
         pcall(function() ESP:Unload() end)
+        pcall(function() Misc:Unload() end)
         if Library then
             Library:Unload()
         end

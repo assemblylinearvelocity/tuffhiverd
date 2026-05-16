@@ -1,43 +1,35 @@
 local VisualsTab = {}
 
-function VisualsTab.Init(Page)
-    local ESPSection = Page:Section({ Name = "ESP", Side = 1 })
+function VisualsTab.Init(Tab)
+    local ESPBox   = Tab:AddLeftGroupbox("ESP")
+    local ChamsBox = Tab:AddRightGroupbox("Chams")
 
-    ESPSection:Toggle({
-        Name = "Player ESP",
+    ESPBox:AddToggle("PlayerESP", {
+        Text    = "Player ESP",
         Default = false,
-        Flag = "PlayerESP",
         Callback = function(Value) end
     })
 
-    ESPSection:Toggle({
-        Name = "Show Health",
+    ESPBox:AddToggle("ShowHealth", {
+        Text    = "Show Health",
         Default = false,
-        Flag = "ShowHealth",
         Callback = function(Value) end
     })
 
-    ESPSection:Toggle({
-        Name = "Show Name",
+    ESPBox:AddToggle("ShowName", {
+        Text    = "Show Name",
         Default = true,
-        Flag = "ShowName",
         Callback = function(Value) end
     })
 
-    local ChamsSection = Page:Section({ Name = "Chams", Side = 2 })
-
-    ChamsSection:Toggle({
-        Name = "Player Chams",
+    ChamsBox:AddToggle("PlayerChams", {
+        Text    = "Player Chams",
         Default = false,
-        Flag = "PlayerChams",
         Callback = function(Value) end
     })
 
-    ChamsSection:Label({ Name = "Chams Color" }):Colorpicker({
-        Name = "Chams Color",
-        Default = Color3.fromRGB(255, 100, 100),
-        Alpha = false,
-        Flag = "ChamsColor",
+    ChamsBox:AddLabel("Chams Color"):AddColorPicker("ChamsColor", {
+        Default  = Color3.fromRGB(255, 100, 100),
         Callback = function(Value) end
     })
 end

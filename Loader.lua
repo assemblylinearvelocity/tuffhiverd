@@ -28,6 +28,12 @@ task.spawn(function()
     local Library = loadModule("GUI/library.lua")
     if not Library then return warn("Failed to load Library") end
 
+    local SaveManager = loadModule("GUI/SaveManager.lua")
+    if not SaveManager then return warn("Failed to load SaveManager") end
+
+    local ThemeManager = loadModule("GUI/ThemeManager.lua")
+    if not ThemeManager then return warn("Failed to load ThemeManager") end
+
     local CombatTab = loadModule("Menu/CombatTab.lua")
     if not CombatTab then return warn("Failed to load CombatTab") end
 
@@ -43,26 +49,28 @@ task.spawn(function()
     local tuffhiverd = {}
 
     function tuffhiverd.init()
-        local Window = Library:Window({
-            Name = "tuffhiverd",
-            Size = UDim2.new(0, 550, 0, 400)
+        local Window = Library:CreateWindow({
+            Title = "tuffhiverd",
+            AutoShow = true,
         })
 
-        local Watermark = Library:Watermark("tuffhiverd")
-        Watermark:SetVisibility(true)
+        local Tabs = {
+            Combat   = Window:AddTab("Combat"),
+            Visuals  = Window:AddTab("Visuals"),
+            Misc     = Window:AddTab("Misc"),
+            Settings = Window:AddTab("Settings"),
+        }
 
-        local KeybindList = Library:KeybindList()
-        KeybindList:SetVisibility(false)
+        CombatTab.Init(Tabs.Combat)
+        VisualsTab.Init(Tabs.Visuals)
+        MiscTab.Init(Tabs.Misc)
+        SettingsTab.Init(Tabs.Settings, Library, SaveManager, ThemeManager)
 
-        local CombatPage   = Window:Page({ Name = "Combat",   Columns = 2 })
-        local VisualsPage  = Window:Page({ Name = "Visuals",  Columns = 2 })
-        local MiscPage     = Window:Page({ Name = "Misc",     Columns = 2 })
-        local SettingsPage = Window:Page({ Name = "Settings", Columns = 2 })
-
-        CombatTab.Init(CombatPage)
-        VisualsTab.Init(VisualsPage)
-        MiscTab.Init(MiscPage, Library)
-        SettingsTab.Init(SettingsPage, Library, Watermark, KeybindList)
+        SaveManager:SetLibrary(Library)
+        ThemeManager:SetLibrary(Library)
+        SaveManager:SetFolder("tuffhiverd")
+        ThemeManager:SetFolder("tuffhiverd")
+        SaveManager:LoadAutoloadConfig()
     end
 
     function tuffhiverd.detach()

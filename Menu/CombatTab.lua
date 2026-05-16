@@ -1,58 +1,49 @@
 local CombatTab = {}
 
-function CombatTab.Init(Page)
-    local ParrySection = Page:Section({ Name = "Parry", Side = 1 })
+function CombatTab.Init(Tab)
+    local ParryBox  = Tab:AddLeftGroupbox("Parry")
+    local CombatBox = Tab:AddRightGroupbox("Combat")
 
-    ParrySection:Toggle({
-        Name = "Auto Parry",
+    ParryBox:AddToggle("AutoParry", {
+        Text    = "Auto Parry",
         Default = false,
-        Flag = "AutoParry",
         Callback = function(Value) end
     })
 
-    ParrySection:Slider({
-        Name = "Parry Window",
-        Min = 0,
-        Max = 500,
-        Decimals = 0,
+    ParryBox:AddSlider("ParryWindow", {
+        Text    = "Parry Window",
         Default = 150,
-        Suffix = "ms",
-        Flag = "ParryWindow",
+        Min     = 0,
+        Max     = 500,
+        Suffix  = "ms",
         Callback = function(Value) end
     })
 
-    ParrySection:Dropdown({
-        Name = "Parry Mode",
-        Items = { "Auto", "Semi-Auto", "Manual" },
-        Default = "Auto",
-        Flag = "ParryMode",
+    ParryBox:AddDropdown("ParryMode", {
+        Text    = "Parry Mode",
+        Values  = { "Auto", "Semi-Auto", "Manual" },
+        Default = 1,
         Callback = function(Value) end
     })
 
-    local CombatSection = Page:Section({ Name = "Combat", Side = 2 })
-
-    CombatSection:Toggle({
-        Name = "Auto Block",
+    CombatBox:AddToggle("AutoBlock", {
+        Text    = "Auto Block",
         Default = false,
-        Flag = "AutoBlock",
         Callback = function(Value) end
     })
 
-    CombatSection:Toggle({
-        Name = "Hit Prediction",
+    CombatBox:AddToggle("HitPrediction", {
+        Text    = "Hit Prediction",
         Default = false,
-        Flag = "HitPrediction",
         Callback = function(Value) end
     })
 
-    CombatSection:Slider({
-        Name = "Prediction Amount",
-        Min = 0,
-        Max = 200,
-        Decimals = 0,
+    CombatBox:AddSlider("PredictionAmount", {
+        Text    = "Prediction Amount",
         Default = 50,
-        Suffix = "ms",
-        Flag = "PredictionAmount",
+        Min     = 0,
+        Max     = 200,
+        Suffix  = "ms",
         Callback = function(Value) end
     })
 end

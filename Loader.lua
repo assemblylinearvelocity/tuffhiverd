@@ -48,6 +48,9 @@ task.spawn(function()
     local MobRenderer    = loadModule("Game/Visuals/MobRenderer.lua")
     if not MobRenderer    then return warn("Failed to load MobRenderer") end
 
+    local ItemRenderer   = loadModule("Game/Visuals/ItemRenderer.lua")
+    if not ItemRenderer   then return warn("Failed to load ItemRenderer") end
+
     local ESP            = loadModule("Game/Visuals/ESP.lua")
     if not ESP            then return warn("Failed to load ESP") end
 
@@ -82,7 +85,7 @@ task.spawn(function()
         SaveManager:IgnoreThemeSettings()
         SaveManager:SetIgnoreIndexes({ "MenuKeybind" })
 
-        ESP:Init(PlayerRenderer, MobRenderer)
+        ESP:Init(PlayerRenderer, MobRenderer, ItemRenderer)
         CombatTab.Init(Tabs.Combat)
         VisualsTab.Init(Tabs.Visuals, ESP)
         MiscTab.Init(Tabs.Misc)

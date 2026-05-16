@@ -37,6 +37,9 @@ task.spawn(function()
     local MiscTab = loadModule("Menu/MiscTab.lua")
     if not MiscTab then return warn("Failed to load MiscTab") end
 
+    local SettingsTab = loadModule("Menu/SettingsTab.lua")
+    if not SettingsTab then return warn("Failed to load SettingsTab") end
+
     local tuffhiverd = {}
 
     function tuffhiverd.init()
@@ -51,13 +54,15 @@ task.spawn(function()
         local KeybindList = Library:KeybindList()
         KeybindList:SetVisibility(false)
 
-        local CombatPage  = Window:Page({ Name = "Combat",  Columns = 2 })
-        local VisualsPage = Window:Page({ Name = "Visuals", Columns = 2 })
-        local MiscPage    = Window:Page({ Name = "Misc",    Columns = 2 })
+        local CombatPage   = Window:Page({ Name = "Combat",   Columns = 2 })
+        local VisualsPage  = Window:Page({ Name = "Visuals",  Columns = 2 })
+        local MiscPage     = Window:Page({ Name = "Misc",     Columns = 2 })
+        local SettingsPage = Window:Page({ Name = "Settings", Columns = 2 })
 
         CombatTab.Init(CombatPage)
         VisualsTab.Init(VisualsPage)
-        MiscTab.Init(MiscPage, Library, Watermark, KeybindList, tuffhiverd.detach)
+        MiscTab.Init(MiscPage, Library)
+        SettingsTab.Init(SettingsPage, Library, Watermark, KeybindList, tuffhiverd.detach)
     end
 
     function tuffhiverd.detach()

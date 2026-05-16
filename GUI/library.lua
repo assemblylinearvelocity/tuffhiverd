@@ -2385,7 +2385,7 @@ local Library do
             Debounce = true 
 
             if Bool then 
-                Items["MainFrame"].Instance.Visible = true
+                pcall(function() Items["MainFrame"].Instance.Visible = true end)
             end
 
             local Descendants = Items["MainFrame"].Instance:GetDescendants()
@@ -2408,9 +2408,15 @@ local Library do
                 end
             end
 
+            if not NewTween then
+                Debounce = false
+                pcall(function() Items["MainFrame"].Instance.Visible = Bool end)
+                return
+            end
+
             Library:Connect(NewTween.Tween.Completed, function()
                 Debounce = false
-                Items["MainFrame"].Instance.Visible = Bool
+                pcall(function() Items["MainFrame"].Instance.Visible = Bool end)
             end)
         end
 

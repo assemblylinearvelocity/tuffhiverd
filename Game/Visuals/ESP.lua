@@ -82,8 +82,9 @@ function ESP:Stop()
         Connection:Disconnect()
         Connection = nil
     end
-    for model in pairs(Renderers) do
-        removeRenderer(model)
+    for model, renderer in pairs(Renderers) do
+        renderer:Destroy()
+        Renderers[model] = nil
     end
 end
 

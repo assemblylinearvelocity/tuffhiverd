@@ -89,7 +89,7 @@ task.spawn(function()
         CombatTab.Init(Tabs.Combat)
         VisualsTab.Init(Tabs.Visuals, ESP)
         MiscTab.Init(Tabs.Misc)
-        SettingsTab.Init(Tabs.Settings, Library, SaveManager, ThemeManager)
+        SettingsTab.Init(Tabs.Settings, Library, SaveManager, ThemeManager, ESP)
 
         Library:SetWatermarkVisibility(true)
         Library:SetWatermark("tuffhiverd")

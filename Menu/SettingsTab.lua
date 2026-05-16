@@ -1,9 +1,10 @@
 local SettingsTab = {}
 
-function SettingsTab.Init(Tab, Library, SaveManager, ThemeManager)
+function SettingsTab.Init(Tab, Library, SaveManager, ThemeManager, ESP)
     local MenuBox = Tab:AddLeftGroupbox("Menu")
 
     MenuBox:AddButton("Unload", function()
+        ESP:Unload()
         Library:Unload()
     end)
 

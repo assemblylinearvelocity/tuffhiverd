@@ -1,19 +1,21 @@
 local SettingsTab = {}
 
 function SettingsTab.Init(Tab, Library, SaveManager, ThemeManager)
-    local UIBox = Tab:AddLeftGroupbox("Interface")
+    local MenuBox = Tab:AddLeftGroupbox("Menu")
 
-    UIBox:AddLabel("Menu Keybind"):AddKeyPicker("MenuKeybind", {
-        Default = "RightControl",
-        Mode    = "Toggle",
+    MenuBox:AddButton("Unload", function()
+        Library:Unload()
+    end)
+
+    MenuBox:AddLabel("Menu Keybind"):AddKeyPicker("MenuKeybind", {
+        Default = "End",
+        NoUI    = true,
         Text    = "Menu Keybind",
-        Callback = function(Value) end,
-        ChangedCallback = function(New)
-            Library.ToggleKeybind = Options.MenuKeybind
-        end
     })
 
-    UIBox:AddToggle("ShowKeybindList", {
+    Library.ToggleKeybind = Options.MenuKeybind
+
+    MenuBox:AddToggle("ShowKeybindList", {
         Text    = "Keybind List",
         Default = false,
         Callback = function(Value)
@@ -21,9 +23,7 @@ function SettingsTab.Init(Tab, Library, SaveManager, ThemeManager)
         end
     })
 
-    local ThemeBox = Tab:AddRightGroupbox("Theme")
-    ThemeManager:ApplyToGroupbox(ThemeBox)
-
+    ThemeManager:ApplyToTab(Tab)
     SaveManager:BuildConfigSection(Tab)
 end
 

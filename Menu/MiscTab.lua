@@ -6,7 +6,6 @@ function MiscTab.Init(Tab)
     GeneralBox:AddToggle("AntiAFK", {
         Text    = "Anti AFK",
         Default = false,
-        Callback = function(Value) end
     })
 end
 

@@ -25,23 +25,23 @@ if shared.tuffhiverd then
 end
 
 task.spawn(function()
-    local Library = loadModule("GUI/library.lua")
-    if not Library then return warn("Failed to load Library") end
-
-    local SaveManager = loadModule("GUI/SaveManager.lua")
-    if not SaveManager then return warn("Failed to load SaveManager") end
+    local Library     = loadModule("GUI/library.lua")
+    if not Library     then return warn("Failed to load Library") end
 
     local ThemeManager = loadModule("GUI/ThemeManager.lua")
     if not ThemeManager then return warn("Failed to load ThemeManager") end
 
-    local CombatTab = loadModule("Menu/CombatTab.lua")
-    if not CombatTab then return warn("Failed to load CombatTab") end
+    local SaveManager  = loadModule("GUI/SaveManager.lua")
+    if not SaveManager  then return warn("Failed to load SaveManager") end
 
-    local VisualsTab = loadModule("Menu/VisualsTab.lua")
-    if not VisualsTab then return warn("Failed to load VisualsTab") end
+    local CombatTab   = loadModule("Menu/CombatTab.lua")
+    if not CombatTab   then return warn("Failed to load CombatTab") end
 
-    local MiscTab = loadModule("Menu/MiscTab.lua")
-    if not MiscTab then return warn("Failed to load MiscTab") end
+    local VisualsTab  = loadModule("Menu/VisualsTab.lua")
+    if not VisualsTab  then return warn("Failed to load VisualsTab") end
+
+    local MiscTab     = loadModule("Menu/MiscTab.lua")
+    if not MiscTab     then return warn("Failed to load MiscTab") end
 
     local SettingsTab = loadModule("Menu/SettingsTab.lua")
     if not SettingsTab then return warn("Failed to load SettingsTab") end
@@ -50,26 +50,34 @@ task.spawn(function()
 
     function tuffhiverd.init()
         local Window = Library:CreateWindow({
-            Title = "tuffhiverd",
-            AutoShow = true,
+            Title        = "tuffhiverd",
+            Center       = true,
+            AutoShow     = true,
+            TabPadding   = 8,
+            MenuFadeTime = 0.2,
         })
 
         local Tabs = {
             Combat   = Window:AddTab("Combat"),
             Visuals  = Window:AddTab("Visuals"),
             Misc     = Window:AddTab("Misc"),
-            Settings = Window:AddTab("Settings"),
+            Settings = Window:AddTab("UI Settings"),
         }
 
-        SaveManager:SetLibrary(Library)
         ThemeManager:SetLibrary(Library)
-        SaveManager:SetFolder("tuffhiverd")
+        SaveManager:SetLibrary(Library)
         ThemeManager:SetFolder("tuffhiverd")
+        SaveManager:SetFolder("tuffhiverd")
+        SaveManager:IgnoreThemeSettings()
+        SaveManager:SetIgnoreIndexes({ "MenuKeybind" })
 
         CombatTab.Init(Tabs.Combat)
         VisualsTab.Init(Tabs.Visuals)
         MiscTab.Init(Tabs.Misc)
         SettingsTab.Init(Tabs.Settings, Library, SaveManager, ThemeManager)
+
+        Library:SetWatermarkVisibility(true)
+        Library:SetWatermark("tuffhiverd")
 
         SaveManager:LoadAutoloadConfig()
     end

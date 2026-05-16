@@ -7,7 +7,6 @@ function CombatTab.Init(Tab)
     ParryBox:AddToggle("AutoParry", {
         Text    = "Auto Parry",
         Default = false,
-        Callback = function(Value) end
     })
 
     ParryBox:AddSlider("ParryWindow", {
@@ -17,26 +16,22 @@ function CombatTab.Init(Tab)
         Max      = 500,
         Rounding = 1,
         Suffix   = "ms",
-        Callback = function(Value) end
     })
 
     ParryBox:AddDropdown("ParryMode", {
         Text    = "Parry Mode",
         Values  = { "Auto", "Semi-Auto", "Manual" },
         Default = 1,
-        Callback = function(Value) end
     })
 
     CombatBox:AddToggle("AutoBlock", {
         Text    = "Auto Block",
         Default = false,
-        Callback = function(Value) end
     })
 
     CombatBox:AddToggle("HitPrediction", {
         Text    = "Hit Prediction",
         Default = false,
-        Callback = function(Value) end
     })
 
     CombatBox:AddSlider("PredictionAmount", {
@@ -46,7 +41,6 @@ function CombatTab.Init(Tab)
         Max      = 200,
         Rounding = 1,
         Suffix   = "ms",
-        Callback = function(Value) end
     })
 end
 

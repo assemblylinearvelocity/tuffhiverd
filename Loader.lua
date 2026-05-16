@@ -62,7 +62,7 @@ task.spawn(function()
         CombatTab.Init(CombatPage)
         VisualsTab.Init(VisualsPage)
         MiscTab.Init(MiscPage, Library)
-        SettingsTab.Init(SettingsPage, Library, Watermark, KeybindList)
+        SettingsTab.Init(SettingsPage, Library, Watermark, KeybindList, Window)
     end
 
     function tuffhiverd.detach()

@@ -11,11 +11,12 @@ function CombatTab.Init(Tab)
     })
 
     ParryBox:AddSlider("ParryWindow", {
-        Text    = "Parry Window",
-        Default = 150,
-        Min     = 0,
-        Max     = 500,
-        Suffix  = "ms",
+        Text     = "Parry Window",
+        Default  = 150,
+        Min      = 0,
+        Max      = 500,
+        Rounding = 0,
+        Suffix   = "ms",
         Callback = function(Value) end
     })
 
@@ -39,11 +40,12 @@ function CombatTab.Init(Tab)
     })
 
     CombatBox:AddSlider("PredictionAmount", {
-        Text    = "Prediction Amount",
-        Default = 50,
-        Min     = 0,
-        Max     = 200,
-        Suffix  = "ms",
+        Text     = "Prediction Amount",
+        Default  = 50,
+        Min      = 0,
+        Max      = 200,
+        Rounding = 0,
+        Suffix   = "ms",
         Callback = function(Value) end
     })
 end

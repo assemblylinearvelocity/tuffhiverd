@@ -47,7 +47,7 @@ local function applyTheme(Library, name)
     end
 end
 
-function SettingsTab.Init(Page, Library, Watermark, KeybindList, Detach)
+function SettingsTab.Init(Page, Library, Watermark, KeybindList)
     local UISection = Page:Section({ Name = "Interface", Side = 1 })
 
     UISection:Label({ Name = "Menu Keybind" }):Keybind({
@@ -84,7 +84,7 @@ function SettingsTab.Init(Page, Library, Watermark, KeybindList, Detach)
     UISection:Button({
         Name = "Unload",
         Callback = function()
-            Detach()
+            Library.Holder.Instance.Visible = false
         end
     })
 

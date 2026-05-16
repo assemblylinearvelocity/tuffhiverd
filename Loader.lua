@@ -42,6 +42,9 @@ task.spawn(function()
     local VisualsTab  = loadModule("Menu/VisualsTab.lua")
     if not VisualsTab  then return warn("Failed to load VisualsTab") end
 
+    local EspRenderer = loadModule("Game/Visuals/EspRenderer.lua")
+    if not EspRenderer then return warn("Failed to load EspRenderer") end
+
     local ESP         = loadModule("Game/Visuals/ESP.lua")
     if not ESP         then return warn("Failed to load ESP") end
 
@@ -76,6 +79,7 @@ task.spawn(function()
         SaveManager:IgnoreThemeSettings()
         SaveManager:SetIgnoreIndexes({ "MenuKeybind" })
 
+        ESP:Init(EspRenderer)
         CombatTab.Init(Tabs.Combat)
         VisualsTab.Init(Tabs.Visuals, ESP)
         MiscTab.Init(Tabs.Misc)

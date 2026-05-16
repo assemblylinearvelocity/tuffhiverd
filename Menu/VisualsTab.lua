@@ -1,12 +1,15 @@
 local VisualsTab = {}
 
 function VisualsTab.Init(Tab, ESP)
-    local ESPBox   = Tab:AddLeftGroupbox("ESP")
-    local ChamsBox = Tab:AddRightGroupbox("Chams")
+    local ESPBox = Tab:AddLeftGroupbox("ESP")
 
     ESPBox:AddToggle("PlayerESP", {
         Text    = "Player ESP",
         Default = false,
+    })
+
+    ESPBox:AddLabel("Player Color"):AddColorPicker("PlayerESPColor", {
+        Default = Color3.fromRGB(255, 255, 255),
     })
 
     ESPBox:AddToggle("MobESP", {
@@ -14,9 +17,13 @@ function VisualsTab.Init(Tab, ESP)
         Default = false,
     })
 
+    ESPBox:AddLabel("Mob Color"):AddColorPicker("MobESPColor", {
+        Default = Color3.fromRGB(255, 100, 100),
+    })
+
     ESPBox:AddToggle("ShowHealth", {
         Text    = "Show Health",
-        Default = false,
+        Default = true,
     })
 
     ESPBox:AddToggle("ShowName", {
@@ -24,34 +31,21 @@ function VisualsTab.Init(Tab, ESP)
         Default = true,
     })
 
-    Toggles.PlayerESP:OnChanged(function(Value)
-        if Value or Toggles.MobESP.Value then
+    Toggles.PlayerESP:OnChanged(function()
+        if Toggles.PlayerESP.Value or Toggles.MobESP.Value then
             ESP:Start()
         else
-            if not Toggles.MobESP.Value then
-                ESP:Stop()
-            end
+            ESP:Stop()
         end
     end)
 
-    Toggles.MobESP:OnChanged(function(Value)
-        if Value or Toggles.PlayerESP.Value then
+    Toggles.MobESP:OnChanged(function()
+        if Toggles.PlayerESP.Value or Toggles.MobESP.Value then
             ESP:Start()
         else
-            if not Toggles.PlayerESP.Value then
-                ESP:Stop()
-            end
+            ESP:Stop()
         end
     end)
-
-    ChamsBox:AddToggle("PlayerChams", {
-        Text    = "Player Chams",
-        Default = false,
-    })
-
-    ChamsBox:AddLabel("Chams Color"):AddColorPicker("ChamsColor", {
-        Default = Color3.fromRGB(255, 100, 100),
-    })
 end
 
 return VisualsTab

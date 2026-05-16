@@ -206,7 +206,7 @@ local Library do
             ["Text Border"] = FromRGB(0, 0, 0)
         },
 
-        MenuKeybind = Enum.KeyCode.Z, 
+        MenuKeybind = "Enum.KeyCode.Z",
 
         Tween = {
             Time = 0.3,

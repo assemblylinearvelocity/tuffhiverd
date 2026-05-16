@@ -47,7 +47,7 @@ local function applyTheme(Library, name)
     end
 end
 
-function SettingsTab.Init(Page, Library, Watermark, KeybindList, Window)
+function SettingsTab.Init(Page, Library, Watermark, KeybindList)
     local UISection = Page:Section({ Name = "Interface", Side = 1 })
 
     UISection:Label({ Name = "Menu Keybind" }):Keybind({
@@ -78,13 +78,6 @@ function SettingsTab.Init(Page, Library, Watermark, KeybindList, Window)
         Flag = "ShowKeybindList",
         Callback = function(Value)
             KeybindList:SetVisibility(Value)
-        end
-    })
-
-    UISection:Button({
-        Name = "Unload",
-        Callback = function()
-            Window.Elements["MainFrame"].Instance.Visible = false
         end
     })
 
